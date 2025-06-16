@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>계수기 입력</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <h3>🔤 이름: <input type="text" id="nameInput" placeholder="이름 입력" /></h3>
+  <h3>🔢 숫자: <input type="number" id="countInput" placeholder="계수기 수치 입력" /></h3>
+  <button onclick="sendData()">전송하기</button>
+
+  <script>
+    function sendData() {
+      const name = document.getElementById("nameInput").value.trim();
+      const count = document.getElementById("countInput").value.trim();
+
+      if (!name || !count) {
+        alert("이름과 숫자를 모두 입력해주세요!");
+        return;
+      }
+
+      const url = "https://script.google.com/macros/s/여기에_AppsScript_URL_붙여넣기/exec";
+
+      fetch(url, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: name,
+          count: Number(count),
+          date: new Date().toISOString()
+        })
+      });
+
+      alert("전송 완료!");
+    }
+  </script>
+</body>
+</html>
