@@ -4,19 +4,50 @@
   <meta charset="UTF-8">
   <title>계수기 입력</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    button.event {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    .selected {
+      background-color: #4CAF50;
+      color: white;
+    }
+  </style>
 </head>
 <body>
   <h3>🔤 이름: <input type="text" id="nameInput" placeholder="이름 입력" /></h3>
   <h3>🔢 숫자: <input type="number" id="countInput" placeholder="계수기 수치 입력" /></h3>
+  
+  <h3>🏃 종목 선택:</h3>
+  <div>
+    <button class="event" onclick="selectEvent(this)">구보</button>
+    <button class="event" onclick="selectEvent(this)">엇걸어</button>
+    <button class="event" onclick="selectEvent(this)">이중</button>
+    <button class="event" onclick="selectEvent(this)">삼중</button>
+    <button class="event" onclick="selectEvent(this)">모아</button>
+  </div>
+
+  <br>
   <button onclick="sendData()">전송하기</button>
 
   <script>
+    let selectedEvent = "";
+
+    function selectEvent(button) {
+      const buttons = document.querySelectorAll(".event");
+      buttons.forEach(btn => btn.classList.remove("selected"));
+      button.classList.add("selected");
+      selectedEvent = button.innerText;
+    }
+
     function sendData() {
       const name = document.getElementById("nameInput").value.trim();
       const count = document.getElementById("countInput").value.trim();
 
-      if (!name || !count) {
-        alert("이름과 숫자를 모두 입력해주세요!");
+      if (!name || !count || !selectedEvent) {
+        alert("이름, 숫자, 종목을 모두 입력해주세요!");
         return;
       }
 
@@ -31,7 +62,7 @@
         body: JSON.stringify({
           name: name,
           count: Number(count),
-          date: new Date().toISOString()
+          event: selectedEvent
         })
       });
 
