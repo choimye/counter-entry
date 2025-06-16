@@ -51,14 +51,13 @@
         return;
       }
 
-      const url = "https://script.google.com/macros/s/AKfycbzUjwTMQvt-H2QxyRz_PtTZRW2sR3bifMH1TD_1iEHWSKvam5HJSeHC0zsedj866Q6zbA/exec";
+      // 새로 배포한 Apps Script URL
+      const url = "https://script.google.com/macros/s/AKfycbzmfIDEkLLMrYRGte30W-AFpA8XFUDSjMP5n-nbYgjyrdfEzQ3Te2WPcHDzPm8efRnhXQ/exec";
 
       fetch(url, {
         method: "POST",
         mode: "no-cors",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: name,
           count: Number(count),
